@@ -1,0 +1,871 @@
+2026-05-27 16:05:52.745 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:05:52.875 +03:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:05:52.907 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:05:52.954 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:05:52.955 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:05:52.956 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:05:52.957 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:06:01.837 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/ - null null
+2026-05-27 16:06:01.912 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:06:01.923 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/ - 404 null null 87.8933ms
+2026-05-27 16:06:01.927 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5090/, Response status code: 404
+2026-05-27 16:06:08.145 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:06:08.232 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 86.5451ms
+2026-05-27 16:06:08.249 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:06:08.260 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 11.9164ms
+2026-05-27 16:06:08.407 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:06:08.508 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 101.0399ms
+2026-05-27 16:06:23.555 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/api/Reviews - application/json 80
+2026-05-27 16:06:23.570 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.ReviewsController.Create (MovieRatingAPI)'
+2026-05-27 16:06:23.760 +03:00 [INF] Route matched with {action = "Create", controller = "Reviews"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MovieRatingAPI.Dto.Reviews.ReviewResponseDto]] Create(MovieRatingAPI.Dto.Reviews.ReviewCreateDto) on controller MovieRatingAPI.Controller.ReviewsController (MovieRatingAPI).
+2026-05-27 16:06:24.576 +03:00 [INF] Executed DbCommand (232ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Reviews] ([Comment], [CreatedAt], [MovieId], [Rating], [UserName])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2026-05-27 16:06:24.622 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2026-05-27 16:06:24.627 +03:00 [INF] Executed action MovieRatingAPI.Controller.ReviewsController.Create (MovieRatingAPI) in 835.362ms
+2026-05-27 16:06:24.628 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.ReviewsController.Create (MovieRatingAPI)'
+2026-05-27 16:06:24.637 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/api/Reviews - 200 null text/plain; charset=utf-8 1081.63ms
+2026-05-27 16:06:34.677 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Reviews - null null
+2026-05-27 16:06:34.680 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.ReviewsController.GetAll (MovieRatingAPI)'
+2026-05-27 16:06:34.713 +03:00 [INF] Route matched with {action = "GetAll", controller = "Reviews"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.Reviews.ReviewResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.ReviewsController (MovieRatingAPI).
+2026-05-27 16:06:35.081 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Reviews] AS [r]
+2026-05-27 16:06:35.099 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[MovieRatingAPI.Data.Model.Reviews, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:06:35.125 +03:00 [INF] Executed action MovieRatingAPI.Controller.ReviewsController.GetAll (MovieRatingAPI) in 409.1251ms
+2026-05-27 16:06:35.126 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.ReviewsController.GetAll (MovieRatingAPI)'
+2026-05-27 16:06:35.128 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Reviews - 200 null application/json; charset=utf-8 451.3976ms
+2026-05-27 16:06:44.125 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:06:44.129 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:06:44.141 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.NewMovieDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:06:44.349 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:06:44.382 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:06:44.392 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 247.3713ms
+2026-05-27 16:06:44.394 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:06:44.396 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Text.Json.JsonException: A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles. Path: $.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Reviews.Movie.Id.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_SerializerCycleDetected(Int32 maxDepth)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Converters.ListOfTConverter`2.OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryWrite(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-05-27 16:06:44.458 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 500 null text/plain; charset=utf-8 333.6479ms
+2026-05-27 16:07:35.616 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:07:35.621 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 5.4015ms
+2026-05-27 16:07:35.634 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:07:35.641 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 6.9381ms
+2026-05-27 16:07:35.783 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:07:35.798 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.6937ms
+2026-05-27 16:07:39.547 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:07:39.549 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:07:39.562 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.NewMovieDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:07:39.579 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title]
+FROM [Movies] AS [m]
+2026-05-27 16:07:39.581 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:07:39.584 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 20.3355ms
+2026-05-27 16:07:39.586 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:07:39.590 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 42.6604ms
+2026-05-27 16:11:19.099 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:11:19.106 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 6.4731ms
+2026-05-27 16:11:19.119 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:11:19.123 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 4.1699ms
+2026-05-27 16:11:19.914 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:11:19.986 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 72.399ms
+2026-05-27 16:11:25.073 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:11:25.076 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:11:25.076 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.NewMovieDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:11:25.094 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title]
+FROM [Movies] AS [m]
+2026-05-27 16:11:25.096 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:11:25.097 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 19.4791ms
+2026-05-27 16:11:25.098 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:11:25.098 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 25.1648ms
+2026-05-27 16:11:32.152 +03:00 [INF] Application is shutting down...
+2026-05-27 16:11:50.687 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:11:50.913 +03:00 [INF] Executed DbCommand (116ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:11:51.121 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:11:51.222 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:11:51.229 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:11:51.231 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:11:51.232 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:11:53.172 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:11:53.372 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 201.294ms
+2026-05-27 16:11:53.404 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:11:53.417 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 13.0636ms
+2026-05-27 16:11:53.621 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:11:53.816 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 195.1337ms
+2026-05-27 16:11:56.563 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:11:56.766 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:11:56.773 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:11:56.818 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:11:57.817 +03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:11:58.104 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:11:58.197 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 1358.2512ms
+2026-05-27 16:11:58.200 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:11:58.215 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 1652.2073ms
+2026-05-27 16:19:07.959 +03:00 [INF] Application is shutting down...
+2026-05-27 16:19:17.587 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:19:17.737 +03:00 [INF] Executed DbCommand (86ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:19:17.760 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:19:17.840 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:19:17.876 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:19:17.879 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:19:17.880 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:19:17.881 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:26:09.150 +03:00 [INF] Application is shutting down...
+2026-05-27 16:26:26.425 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:26:26.541 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:26:26.559 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:26:26.609 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:26:26.644 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:26:26.647 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:26:26.647 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:26:26.648 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:26:33.668 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/ - null null
+2026-05-27 16:26:33.792 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:26:33.799 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/ - 404 null null 132.4748ms
+2026-05-27 16:26:33.802 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5090/, Response status code: 404
+2026-05-27 16:26:40.236 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:26:40.302 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 66.1582ms
+2026-05-27 16:26:40.311 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:26:40.333 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 22.1609ms
+2026-05-27 16:26:40.448 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:26:40.565 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 118.0268ms
+2026-05-27 16:26:49.284 +03:00 [INF] Application is shutting down...
+2026-05-27 16:27:35.664 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:27:35.787 +03:00 [INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:27:35.815 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:27:35.870 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:27:35.907 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:27:35.912 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:27:35.914 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:27:35.916 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:27:40.674 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:27:40.804 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 132.9532ms
+2026-05-27 16:27:40.812 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:27:40.818 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 5.7937ms
+2026-05-27 16:27:40.874 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:27:41.007 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 132.4956ms
+2026-05-27 16:28:09.256 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/register?Username=jassim12%40J&Email=jassim%40gmail.com&Password=12345678%40Jassim - null 0
+2026-05-27 16:28:09.268 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:28:09.275 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:28:09.303 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MovieRatingAPI.dto.auth.RegisterDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:28:09.319 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI) in 11.0289ms
+2026-05-27 16:28:09.321 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:28:09.322 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MovieRatingAPI.Interface.ITokenService' while attempting to activate 'MovieRatingAPI.Controller.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method29(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-05-27 16:28:09.345 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/register?Username=jassim12%40J&Email=jassim%40gmail.com&Password=12345678%40Jassim - 500 null text/plain; charset=utf-8 88.4558ms
+2026-05-27 16:29:16.787 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:29:16.790 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 3.0843ms
+2026-05-27 16:29:16.802 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:29:16.805 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 2.4197ms
+2026-05-27 16:29:16.927 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:29:16.944 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.0915ms
+2026-05-27 16:29:22.500 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:29:22.502 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 2.0698ms
+2026-05-27 16:29:22.511 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:29:22.513 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 1.855ms
+2026-05-27 16:29:22.591 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:29:22.602 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.667ms
+2026-05-27 16:29:52.173 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/register?Username=Jassim1%401&Email=jassim2%40gmail.com&Password=jassim2%40AAA - null 0
+2026-05-27 16:29:52.176 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:29:52.189 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MovieRatingAPI.dto.auth.RegisterDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:29:52.199 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI) in 6.9708ms
+2026-05-27 16:29:52.200 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:29:52.200 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MovieRatingAPI.Interface.ITokenService' while attempting to activate 'MovieRatingAPI.Controller.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method37(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-05-27 16:29:52.206 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/register?Username=Jassim1%401&Email=jassim2%40gmail.com&Password=jassim2%40AAA - 500 null text/plain; charset=utf-8 32.8929ms
+2026-05-27 16:30:08.223 +03:00 [INF] Application is shutting down...
+2026-05-27 16:30:22.109 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:30:22.231 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:30:22.255 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:30:22.300 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:30:22.335 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:30:22.338 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:30:22.339 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:30:22.339 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:30:27.139 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:30:27.250 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 112.1863ms
+2026-05-27 16:30:27.268 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:30:27.278 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 10.2673ms
+2026-05-27 16:30:27.337 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:30:27.463 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 125.7753ms
+2026-05-27 16:30:50.435 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/register?Username=jassimMoa%402&Email=j%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:30:50.452 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:30:50.455 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:30:50.481 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MovieRatingAPI.dto.auth.RegisterDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:30:51.223 +03:00 [INF] Executed DbCommand (34ms) [Parameters=[@normalizedUserName='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @normalizedUserName
+2026-05-27 16:30:51.435 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-05-27 16:30:51.452 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI) in 967.4376ms
+2026-05-27 16:30:51.453 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:30:51.456 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For .NET Core applications please call the `IServiceCollection.AddHangfire` extension method from Hangfire.NetCore or Hangfire.AspNetCore package depending on your application type when configuring the services and ensure service-based APIs are used instead of static ones, like `IBackgroundJobClient` instead of `BackgroundJob` and `IRecurringJobManager` instead of `RecurringJob`.
+   at Hangfire.JobStorage.get_Current() in C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs:line 42
+   at Hangfire.BackgroundJobClient..ctor() in C:\projects\hangfire-525\src\Hangfire.Core\BackgroundJobClient.cs:line 63
+   at Hangfire.BackgroundJob.<>c.<.cctor>b__68_0() in C:\projects\hangfire-525\src\Hangfire.Core\BackgroundJob.cs:line 47
+   at Hangfire.BackgroundJob.Enqueue(Expression`1 methodCall) in C:\projects\hangfire-525\src\Hangfire.Core\BackgroundJob.cs:line 84
+   at MovieRatingAPI.Controller.AuthController.Register(RegisterDto dto) in C:\Users\user\MovieRatingAPI\Controller\AuthController.cs:line 41
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2026-05-27 16:30:51.486 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/register?Username=jassimMoa%402&Email=j%40gmail.com&Password=jassimMoa%402222 - 500 null text/plain; charset=utf-8 1050.8344ms
+2026-05-27 16:31:13.425 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:31:13.428 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 2.9419ms
+2026-05-27 16:31:13.438 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:31:13.440 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 2.0437ms
+2026-05-27 16:31:13.497 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:31:13.524 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 26.4531ms
+2026-05-27 16:31:37.089 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/register?Username=jassimMoa%402222&Email=jassim22%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:31:37.105 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:31:37.121 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MovieRatingAPI.dto.auth.RegisterDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:31:37.291 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@normalizedUserName='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @normalizedUserName
+2026-05-27 16:31:37.299 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-05-27 16:31:37.303 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2026-05-27 16:31:37.305 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI) in 182.2022ms
+2026-05-27 16:31:37.306 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Register (MovieRatingAPI)'
+2026-05-27 16:31:37.307 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/register?Username=jassimMoa%402222&Email=jassim22%40gmail.com&Password=jassimMoa%402222 - 200 null text/plain; charset=utf-8 217.0717ms
+2026-05-27 16:32:06.495 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:32:06.498 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:32:06.508 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MovieRatingAPI.dto.auth.LoginDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:32:06.547 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@normalizedEmail='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @normalizedEmail
+2026-05-27 16:32:06.635 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-27 16:32:06.648 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI) in 138.7199ms
+2026-05-27 16:32:06.649 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:32:06.650 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - 200 null application/json; charset=utf-8 154.688ms
+2026-05-27 16:32:38.664 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:32:38.667 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 2.1441ms
+2026-05-27 16:32:38.675 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:32:38.677 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 1.2735ms
+2026-05-27 16:32:38.763 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:32:38.776 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 12.7726ms
+2026-05-27 16:32:51.843 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:32:51.850 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 7.1065ms
+2026-05-27 16:32:51.865 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:32:51.867 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 1.9604ms
+2026-05-27 16:32:51.925 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:32:51.936 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.787ms
+2026-05-27 16:32:58.832 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:32:58.852 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.6275ms
+2026-05-27 16:34:24.107 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:34:24.122 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 15.829ms
+2026-05-27 16:34:24.138 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:34:24.143 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 4.9974ms
+2026-05-27 16:34:24.205 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:34:24.222 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.3113ms
+2026-05-27 16:34:26.658 +03:00 [INF] Application is shutting down...
+2026-05-27 16:34:47.483 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:34:47.705 +03:00 [INF] Executed DbCommand (99ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:34:47.740 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:34:47.803 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:34:47.857 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:34:47.861 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:34:47.866 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:34:47.867 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:35:29.072 +03:00 [INF] Application is shutting down...
+2026-05-27 16:35:39.773 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:35:39.872 +03:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:35:39.940 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:35:40.048 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:35:40.199 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:35:40.246 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:35:40.256 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:35:40.263 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:35:45.744 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:35:45.861 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 117.7785ms
+2026-05-27 16:35:45.875 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:35:45.879 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 3.428ms
+2026-05-27 16:35:45.930 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:35:46.068 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 139.1685ms
+2026-05-27 16:36:00.043 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:36:00.056 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:36:00.065 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:36:00.095 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MovieRatingAPI.dto.auth.LoginDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:36:00.519 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@normalizedEmail='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @normalizedEmail
+2026-05-27 16:36:00.704 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-27 16:36:00.727 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI) in 628.2272ms
+2026-05-27 16:36:00.729 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:36:00.738 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - 200 null application/json; charset=utf-8 694.789ms
+2026-05-27 16:36:15.593 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:15.594 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:15.610 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:15.822 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:15.880 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:15.896 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 285.3178ms
+2026-05-27 16:36:15.897 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:15.899 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 306.0915ms
+2026-05-27 16:36:39.561 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:36:39.568 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 7.32ms
+2026-05-27 16:36:39.591 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:36:39.594 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 3.1447ms
+2026-05-27 16:36:39.763 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:36:39.824 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 61.5641ms
+2026-05-27 16:36:47.824 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:47.826 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:47.837 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:47.856 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:47.858 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:47.861 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 22.3978ms
+2026-05-27 16:36:47.862 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:47.862 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 38.341ms
+2026-05-27 16:36:49.327 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:49.330 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:49.331 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:49.337 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:49.339 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:49.341 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 8.4065ms
+2026-05-27 16:36:49.342 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:49.342 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 15.0309ms
+2026-05-27 16:36:49.792 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:49.795 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:49.795 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:49.802 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:49.804 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:49.806 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 9.7816ms
+2026-05-27 16:36:49.808 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:49.812 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 19.0419ms
+2026-05-27 16:36:49.973 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:49.975 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:49.976 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:49.990 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:50.000 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:50.006 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 29.482ms
+2026-05-27 16:36:50.007 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.008 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 34.8727ms
+2026-05-27 16:36:50.146 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:50.148 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.148 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:50.152 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:50.154 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:50.155 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 5.506ms
+2026-05-27 16:36:50.157 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.159 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 12.9537ms
+2026-05-27 16:36:50.305 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:50.307 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.308 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:50.310 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:50.313 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:50.314 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 5.2155ms
+2026-05-27 16:36:50.320 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.328 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 23.1597ms
+2026-05-27 16:36:50.460 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:36:50.461 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.462 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:36:50.465 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:36:50.468 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:36:50.470 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 6.6384ms
+2026-05-27 16:36:50.475 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:36:50.480 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 20.7035ms
+2026-05-27 16:37:01.290 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:37:01.292 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 1.8789ms
+2026-05-27 16:37:01.306 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:37:01.308 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 1.4802ms
+2026-05-27 16:37:01.364 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:37:01.379 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.4025ms
+2026-05-27 16:37:04.089 +03:00 [INF] Application is shutting down...
+2026-05-27 16:37:14.153 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:37:14.246 +03:00 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:37:14.261 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:37:14.294 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:37:14.328 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:37:14.330 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:37:14.331 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:37:14.331 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:37:45.076 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:37:45.175 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 96.4437ms
+2026-05-27 16:37:45.184 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:37:45.192 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 7.7411ms
+2026-05-27 16:37:45.241 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:37:45.343 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 101.511ms
+2026-05-27 16:37:48.172 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:37:48.178 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:37:48.196 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:37:48.221 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:37:48.222 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 50.4183ms
+2026-05-27 16:38:09.660 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:09.663 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:09.740 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:09.741 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 81.2377ms
+2026-05-27 16:38:15.071 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:15.074 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:15.080 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:15.082 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 10.9512ms
+2026-05-27 16:38:15.577 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:15.579 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:15.580 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:15.581 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 3.7907ms
+2026-05-27 16:38:15.829 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:15.832 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:15.833 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:15.835 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 4.9892ms
+2026-05-27 16:38:16.359 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:16.361 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:16.363 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:16.365 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 5.6137ms
+2026-05-27 16:38:40.519 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:38:40.525 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:38:40.551 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MovieRatingAPI.dto.auth.LoginDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:38:40.908 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[@normalizedEmail='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @normalizedEmail
+2026-05-27 16:38:41.055 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-27 16:38:41.073 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI) in 515.9754ms
+2026-05-27 16:38:41.075 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:38:41.081 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - 200 null application/json; charset=utf-8 561.5398ms
+2026-05-27 16:38:59.943 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:38:59.946 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:38:59.947 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:38:59.948 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 4.7916ms
+2026-05-27 16:39:00.529 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:39:00.531 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:39:00.532 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:39:00.533 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 3.7942ms
+2026-05-27 16:39:00.707 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:39:00.709 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:39:00.710 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:39:00.710 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 3.1375ms
+2026-05-27 16:39:00.881 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:39:00.883 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:39:00.885 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:39:00.886 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 5.0349ms
+2026-05-27 16:39:08.874 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:39:08.876 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 2.0258ms
+2026-05-27 16:39:08.891 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:39:08.893 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 2.1265ms
+2026-05-27 16:39:08.995 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:39:09.033 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 37.8148ms
+2026-05-27 16:39:22.440 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:39:22.442 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:39:22.443 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:39:22.444 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 4.6302ms
+2026-05-27 16:40:18.325 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:40:18.328 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 2.5302ms
+2026-05-27 16:40:18.346 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:40:18.349 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 2.6712ms
+2026-05-27 16:40:18.448 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:40:18.486 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 37.6359ms
+2026-05-27 16:40:26.598 +03:00 [INF] Application is shutting down...
+2026-05-27 16:40:38.725 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-27 16:40:38.824 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-27 16:40:38.840 +03:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-27 16:40:38.880 +03:00 [WRN] The WebRootPath was not found: C:\Users\user\MovieRatingAPI\wwwroot. Static files may be unavailable.
+2026-05-27 16:40:38.913 +03:00 [INF] Now listening on: http://localhost:5090
+2026-05-27 16:40:38.916 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-27 16:40:38.917 +03:00 [INF] Hosting environment: Development
+2026-05-27 16:40:38.918 +03:00 [INF] Content root path: C:\Users\user\MovieRatingAPI
+2026-05-27 16:40:50.379 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/index.html - null null
+2026-05-27 16:40:50.481 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/index.html - 200 null text/html;charset=utf-8 102.8103ms
+2026-05-27 16:40:50.530 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-27 16:40:50.533 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/_framework/aspnetcore-browser-refresh.js - 200 14901 application/javascript; charset=utf-8 3.1942ms
+2026-05-27 16:40:50.577 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - null null
+2026-05-27 16:40:50.739 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 162.4305ms
+2026-05-27 16:41:57.493 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - null 0
+2026-05-27 16:41:57.519 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-27 16:41:57.553 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:41:57.578 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MovieRatingAPI.dto.auth.LoginDto) on controller MovieRatingAPI.Controller.AuthController (MovieRatingAPI).
+2026-05-27 16:41:57.933 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@normalizedEmail='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @normalizedEmail
+2026-05-27 16:41:58.075 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-27 16:41:58.093 +03:00 [INF] Executed action MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI) in 509.9193ms
+2026-05-27 16:41:58.094 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.AuthController.Login (MovieRatingAPI)'
+2026-05-27 16:41:58.099 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5090/login?Email=jassim22%40gmail.com&Password=jassimMoa%402222 - 200 null application/json; charset=utf-8 606.0785ms
+2026-05-27 16:42:22.802 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:42:22.858 +03:00 [INF] Executing endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:42:22.864 +03:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[MovieRatingAPI.Dto.movies.MovieResponseDto]]] GetAll() on controller MovieRatingAPI.Controller.MoviesController (MovieRatingAPI).
+2026-05-27 16:42:23.010 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[Description], [m].[Genre], [m].[ReleaseYear], [m].[Title], [r].[Id], [r].[Comment], [r].[CreatedAt], [r].[MovieId], [r].[Rating], [r].[UserName]
+FROM [Movies] AS [m]
+LEFT JOIN [Reviews] AS [r] ON [m].[Id] = [r].[MovieId]
+ORDER BY [m].[Id]
+2026-05-27 16:42:23.050 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[MovieRatingAPI.Data.Movies, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[MovieRatingAPI.Dto.movies.MovieResponseDto, MovieRatingAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 16:42:23.066 +03:00 [INF] Executed action MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI) in 199.6032ms
+2026-05-27 16:42:23.067 +03:00 [INF] Executed endpoint 'MovieRatingAPI.Controller.MoviesController.GetAll (MovieRatingAPI)'
+2026-05-27 16:42:23.068 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 200 null application/json; charset=utf-8 266.1484ms
+2026-05-27 16:42:45.343 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5090/api/Movies - null null
+2026-05-27 16:42:45.351 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-05-27 16:42:45.356 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-05-27 16:42:45.358 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5090/api/Movies - 401 0 null 14.225ms
+2026-05-27 16:44:03.251 +03:00 [INF] Application is shutting down...
