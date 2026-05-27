@@ -187,3 +187,7 @@ C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\refint\MovieRatingAPI.dll
 C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\MovieRatingAPI.pdb
 C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\MovieRatingAPI.genruntimeconfig.cache
 C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\ref\MovieRatingAPI.dll
+C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\MovieRatingAPI.sourcelink.json
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\BouncyCastle.Cryptography.dll
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\MailKit.dll
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\MimeKit.dll

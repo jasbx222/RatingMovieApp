@@ -38,7 +38,6 @@ public class AuthController : ControllerBase
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
-        // BackgroundJob.Enqueue(() => Console.WriteLine($"User {user.UserName} registered at {DateTime.Now}"));
         return Ok("User Created");
     }
 

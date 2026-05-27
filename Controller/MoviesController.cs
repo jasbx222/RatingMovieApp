@@ -6,6 +6,9 @@ using MovieRatingAPI.Data;
 using MovieRatingAPI.Dto.Reviews;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Authorization;
+using Hangfire;
+using Serilog;
+using MovieRatingAPI.dto.email;
 
 namespace MovieRatingAPI.Controller
 {
@@ -15,14 +18,17 @@ namespace MovieRatingAPI.Controller
     public class MoviesController : ControllerBase
     {
         private readonly IMoviesInterface _movies;
+        private readonly IEmailInterface _emailService;
 
-        public MoviesController(IMoviesInterface moviesInterface)
+        public MoviesController(IMoviesInterface moviesInterface, IEmailInterface emailService)
         {
             _movies = moviesInterface;
+            _emailService = emailService;
         }
-
+   
         [HttpGet]
-     
+
+
         public async Task<ActionResult<IEnumerable<MovieResponseDto>>> GetAll()
         {
             var movies = await _movies.GetAllAsync();
@@ -51,6 +57,15 @@ namespace MovieRatingAPI.Controller
             };
 
             var createdMovie = await _movies.CreateAsync(movie);
+
+            // Fire and forget
+
+
+            var JopsIdOne = BackgroundJob.Enqueue(() => _emailService.SendEmailAsync());
+            // Schedule & deployment 
+            // var JopsIdTwo = BackgroundJob.Schedule(() => GetAll(), TimeSpan.FromSeconds(5));
+            // ContinueJobWith jop worked by action like another jop work
+            // BackgroundJob.ContinueJobWith(1, () => Log.Warning($" ContinueJobWith worked {1}"));
 
             return Ok();
         }
@@ -88,10 +103,14 @@ namespace MovieRatingAPI.Controller
 
         public async Task<Movies?> DeleteAsync(int id)
         {
-             await _movies.DeleteAsync(id);
+            await _movies.DeleteAsync(id);
             return null;
 
 
         }
+
+
+
+
     }
 }

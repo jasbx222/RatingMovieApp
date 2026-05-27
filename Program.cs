@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MyApi.Service; // تأكد أن هذا الـ Namespace مطابق لكلاس الـ TokenService الخاص بك
 using Microsoft.OpenApi.Models;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,9 +103,18 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IReviewsInterface, ReviewRepository>();
 builder.Services.AddScoped<IMoviesInterface, MoviesRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>(); // تم حل مشكلتك السابقة هنا بوضعها في المكان الصحيح
+builder.Services.AddScoped<IEmailInterface,EmailService>();
+// ================= Hangfire =================
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
+//hangfire dashboard
+app.UseHangfireDashboard();
 // ================= Middleware Pipeline =================
 if (app.Environment.IsDevelopment())
 {

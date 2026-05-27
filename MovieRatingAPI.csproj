@@ -9,6 +9,7 @@
   <ItemGroup>
 
     <!-- Swagger -->
+    <PackageReference Include="MailKit" Version="4.17.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 
