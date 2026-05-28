@@ -15,7 +15,7 @@ namespace MovieRatingAPI.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles ="admin")]
     public class MoviesController : ControllerBase
     {
         private readonly IMoviesInterface _movies;

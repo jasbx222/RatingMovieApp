@@ -23,7 +23,12 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // ================= Controllers =================
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => 
+    {
+        // هذا السطر يحول الـ Enums من أرقام إلى نصوص في الـ JSON
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
 builder.Services.AddEndpointsApiExplorer();
 
 // ================= Swagger (With JWT Bearer Config) =================
@@ -103,7 +108,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IReviewsInterface, ReviewRepository>();
 builder.Services.AddScoped<IMoviesInterface, MoviesRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>(); // تم حل مشكلتك السابقة هنا بوضعها في المكان الصحيح
-builder.Services.AddScoped<IEmailInterface,EmailService>();
+builder.Services.AddScoped<IEmailInterface, EmailService>();
 // ================= Hangfire =================
 builder.Services.AddHangfire(config =>
     config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -129,7 +134,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // الترتيب هنا مهم جداً: الأوث أولاً ثم الصلاحيات
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -141,7 +146,80 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<DataContext>();
+        //seed roles
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        var roles = new[] { "admin", "user", "customer" };
+        //check if not exist
+        foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+
+        }
         context.Database.EnsureCreated();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "حدث خطأ أثناء تهيئة قاعدة البيانات وبذر البيانات.");
+    }
+}
+//create new user and assign to roles 
+// ================= Seed Database & Run =================
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<DataContext>();
+        
+        // 1. التأكد أولاً من إنشاء قاعدة البيانات لتفادي أي خطأ سياق
+        context.Database.EnsureCreated(); 
+
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>(); // تم التعديل هنا إلى AppUser
+
+        // 2. بذر الأدوار (Roles)
+        var roles = new[] { "admin", "user", "customer" };
+        foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+
+        // 3. بذر المستخدم المسؤول (Admin User)
+        string email = "jassimroles@gmail.com";
+        string password = "Jassim@222";
+        string adminRole = "admin"; // تأكد من مطابقة حالة الأحرف (صغيرة كما في المصفوفة أعلاه)
+
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            var newUser = new AppUser // تم التعديل هنا إلى AppUser
+            {
+                Email = email,
+                UserName = email,
+                EmailConfirmed = true 
+            };
+
+            var result = await userManager.CreateAsync(newUser, password);
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(newUser, adminRole);
+            }
+            else
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                foreach (var error in result.Errors)
+                {
+                    logger.LogError($"خطأ في إنشاء المستخدم: {error.Description}");
+                }
+            }
+        }
     }
     catch (Exception ex)
     {
