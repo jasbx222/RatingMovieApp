@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Hangfire;
 using Serilog;
 using MovieRatingAPI.dto.email;
+using MovieRatingAPI.Helpers;
 
 namespace MovieRatingAPI.Controller
 {
@@ -29,9 +30,9 @@ namespace MovieRatingAPI.Controller
         [HttpGet]
 
 
-        public async Task<ActionResult<IEnumerable<MovieResponseDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<MovieResponseDto>>> GetAll([FromQuery] QueryObject queryObject)
         {
-            var movies = await _movies.GetAllAsync();
+            var movies = await _movies.GetAllAsync(queryObject);
 
             return Ok(movies);
         }

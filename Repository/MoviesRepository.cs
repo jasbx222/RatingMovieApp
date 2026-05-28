@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieRatingAPI.Dto.Reviews;
 using Microsoft.AspNetCore.Http.HttpResults;
+using MovieRatingAPI.Helpers;
 namespace MovieRatingAPI.Repository;
 
 
@@ -20,7 +21,7 @@ public class MoviesRepository : IMoviesInterface
     }
     public async Task<Movies> CreateAsync(Movies movie)
     {
-
+ 
         await _context.Movies.AddAsync(movie);
 
         await _context.SaveChangesAsync();
@@ -48,11 +49,15 @@ public class MoviesRepository : IMoviesInterface
 
     }
 
-    public async Task<IEnumerable<MovieResponseDto>> GetAllAsync()
+    public async Task<IEnumerable<MovieResponseDto>> GetAllAsync(QueryObject queryObject)
     {
-        var movies = await _context.Movies.Include(r => r.Reviews).ToListAsync();
+      var query = _context.Movies.Include(r => r.Reviews).AsQueryable();
+ if (!string.IsNullOrEmpty(queryObject.MovieName))
+        {
+            query= query.Where(m=>m.Title.Contains(queryObject.MovieName));
+        }
 
-     var movieDtos = movies.Select(m => new MovieResponseDto
+     var movieDtos =  query.Select(m => new MovieResponseDto
     {
         Id = m.Id,
         Title = m.Title,
@@ -68,7 +73,7 @@ public class MoviesRepository : IMoviesInterface
         }).ToList()
     });
 
-    return movieDtos;
+return movieDtos;
     }
 
     public async Task<Movies?> GetByIdAsync(int id)
