@@ -11,6 +11,7 @@ using System.Text;
 using MyApi.Service; // تأكد أن هذا الـ Namespace مطابق لكلاس الـ TokenService الخاص بك
 using Microsoft.OpenApi.Models;
 using Hangfire;
+using MovieRatingAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,7 +71,12 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
-
+//====================Cashing //==============
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379";
+    options.InstanceName = "MovieApp_";
+});
 // ================= Identity =================
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>()
@@ -109,6 +115,7 @@ builder.Services.AddScoped<IReviewsInterface, ReviewRepository>();
 builder.Services.AddScoped<IMoviesInterface, MoviesRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>(); // تم حل مشكلتك السابقة هنا بوضعها في المكان الصحيح
 builder.Services.AddScoped<IEmailInterface, EmailService>();
+builder.Services.AddScoped<ICacheService, RedisCacheService>();
 // ================= Hangfire =================
 builder.Services.AddHangfire(config =>
     config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"))

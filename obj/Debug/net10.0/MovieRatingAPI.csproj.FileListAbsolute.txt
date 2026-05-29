@@ -191,3 +191,6 @@ C:\Users\user\MovieRatingAPI\obj\Debug\net10.0\MovieRatingAPI.sourcelink.json
 C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\BouncyCastle.Cryptography.dll
 C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\MailKit.dll
 C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\MimeKit.dll
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\user\MovieRatingAPI\bin\Debug\net10.0\StackExchange.Redis.dll
