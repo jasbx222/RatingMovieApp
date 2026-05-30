@@ -22,6 +22,7 @@ public class TokenService : ITokenService
 
     public string GenerateToken(AppUser user)
     {
+
         // 3. جلب الأدوار الخاصة بالمستخدم بشكل متزامن
         var userRoles = _userManager.GetRolesAsync(user).Result;
 
@@ -31,7 +32,12 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim ("Permission","CreateMovie"),
+            new Claim ("Permission","ViewMovie"),
+            new Claim ("Permission","UpdateMovie"),
+            new Claim ("Permission","DeleteMovie"),
+
         };
 
         // 5. إضافة الأدوار المسترجعة إلى قائمة الـ Claims
@@ -39,7 +45,7 @@ public class TokenService : ITokenService
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
         }
-
+        
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

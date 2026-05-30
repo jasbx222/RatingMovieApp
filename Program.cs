@@ -71,6 +71,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
 //====================Cashing //==============
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -109,7 +110,13 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("DeleteMovie", policy =>
+    {
+        policy.RequireClaim("Permission", "DeleteMovie");
+    });
+});
 // ================= Dependency Injection (DI) =================
 builder.Services.AddScoped<IReviewsInterface, ReviewRepository>();
 builder.Services.AddScoped<IMoviesInterface, MoviesRepository>();

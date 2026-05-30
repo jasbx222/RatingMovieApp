@@ -101,7 +101,7 @@ namespace MovieRatingAPI.Controller
         }
         [HttpDelete("{id}")]
 
-
+[Authorize(Policy = "DeleteMovie")]
         public async Task<Movies?> DeleteAsync(int id)
         {
             await _movies.DeleteAsync(id);
